@@ -17,9 +17,20 @@ st.set_page_config(
 st.markdown("""
 <style>
 
-.main {
-    background-color: #F5F7FA;
+/* Main App */
+
+.stApp {
+    background-color: #0E1117;
+    color: white;
 }
+
+/* Sidebar */
+
+section[data-testid="stSidebar"] {
+    background-color: #1E1E2F;
+}
+
+/* Buttons */
 
 .stButton button {
     width: 100%;
@@ -27,43 +38,112 @@ st.markdown("""
     height: 45px;
     font-size: 16px;
     font-weight: bold;
+    background-color: #1F4E79;
+    color: white;
+    border: none;
 }
 
+.stButton button:hover {
+    background-color: #2E6EA6;
+    color: white;
+}
+
+/* Question Cards */
+
 .question-card {
-    background-color: white;
+    background-color: #1E1E2F;
     padding: 20px;
     border-radius: 15px;
     margin-bottom: 15px;
-    box-shadow: 0px 2px 10px rgba(0,0,0,0.08);
+    border: 1px solid #2E2E3E;
+    box-shadow: 0px 2px 8px rgba(0,0,0,0.3);
 }
 
-.sidebar .sidebar-content {
-    background-color: #FFFFFF;
+/* Question Title */
+
+.question-title {
+    color: #4DA3FF;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+/* Question Text */
+
+.question-text {
+    color: white;
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+/* Header */
+
+.main-title {
+    text-align: center;
+    color: #4DA3FF;
+    font-size: 52px;
+    font-weight: bold;
+}
+
+.sub-title {
+    text-align: center;
+    color: #CFCFCF;
+    font-size: 32px;
+    margin-top: 10px;
+}
+
+.caption-text {
+    text-align: center;
+    color: white;
+    font-size: 18px;
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+
+/* Footer */
+
+.footer {
+    text-align: center;
+    color: gray;
+    padding: 20px;
+    margin-top: 30px;
+}
+
+/* Success Message */
+
+.stSuccess {
+    border-radius: 10px;
+}
+
+/* Checkbox */
+
+.stCheckbox label {
+    color: white !important;
+    font-size: 16px;
 }
 
 </style>
 """, unsafe_allow_html=True)
 
 # ---------------------------------------------------
-# HEADER / BRANDING
+# HEADER
 # ---------------------------------------------------
 
 st.markdown("""
-<h1 style='text-align: center; color: #1F4E79;'>
+<div class="main-title">
 🚀 Miracle Data Practices
-</h1>
+</div>
 """, unsafe_allow_html=True)
 
 st.markdown("""
-<h3 style='text-align: center; color: gray;'>
+<div class="sub-title">
 Recruitment Interview Portal
-</h3>
+</div>
 """, unsafe_allow_html=True)
 
 st.markdown("""
-<p style='text-align: center; font-size:18px;'>
+<div class="caption-text">
 Interview Question Assistant for Data Engineers & Power BI Developers
-</p>
+</div>
 """, unsafe_allow_html=True)
 
 st.divider()
@@ -81,7 +161,7 @@ question_bank = {
             {
                 "question": "Explain Incremental Loading.",
                 "answer": """
-Incremental loading loads only new or modified records instead of loading full data.
+Incremental loading loads only new or modified records instead of full load.
 
 Methods:
 - Timestamp
@@ -109,11 +189,9 @@ Examples:
 DELETE:
 - Removes rows one by one
 - Can use WHERE clause
-- Logged operation
 
 TRUNCATE:
-- Removes all rows
-- Faster
+- Removes all rows quickly
 - Resets identity
 """
             }
@@ -125,21 +203,21 @@ TRUNCATE:
             {
                 "question": "What is Integration Runtime?",
                 "answer": """
-Integration Runtime is the compute infrastructure used by ADF to move and transform data.
+Integration Runtime is the compute infrastructure used by Azure Data Factory.
 """
             },
 
             {
                 "question": "Explain Copy Activity.",
                 "answer": """
-Copy Activity is used to transfer data between source and destination systems.
+Copy Activity is used to transfer data from source to destination.
 """
             },
 
             {
                 "question": "What are Linked Services?",
                 "answer": """
-Linked Services are connection strings used to connect external systems in ADF.
+Linked Services are connection configurations used to connect external systems.
 """
             }
 
@@ -150,24 +228,28 @@ Linked Services are connection strings used to connect external systems in ADF.
             {
                 "question": "Explain Medallion Architecture.",
                 "answer": """
-Medallion Architecture consists of:
-- Bronze Layer → Raw Data
-- Silver Layer → Cleansed Data
-- Gold Layer → Business Ready Data
+Bronze Layer:
+Raw data
+
+Silver Layer:
+Cleaned and transformed data
+
+Gold Layer:
+Business-ready data
 """
             },
 
             {
                 "question": "What is OneLake?",
                 "answer": """
-OneLake is Microsoft Fabric’s unified data lake storage.
+OneLake is Microsoft Fabric's unified data lake storage.
 """
             },
 
             {
                 "question": "What is a Lakehouse?",
                 "answer": """
-Lakehouse combines features of Data Lake and Data Warehouse.
+Lakehouse combines Data Lake and Data Warehouse capabilities.
 """
             }
 
@@ -176,17 +258,17 @@ Lakehouse combines features of Data Lake and Data Warehouse.
         "PySpark": [
 
             {
-                "question": "What is lazy evaluation in PySpark?",
+                "question": "What is Lazy Evaluation?",
                 "answer": """
-PySpark transformations are evaluated only when an action is triggered.
+Transformations execute only when an action is triggered.
 """
             },
 
             {
-                "question": "Difference between transformation and action?",
+                "question": "Difference between Transformation and Action?",
                 "answer": """
 Transformation:
-Returns new dataframe.
+Returns a new dataframe.
 
 Action:
 Executes computation and returns result.
@@ -214,7 +296,7 @@ Measure:
 Calculated dynamically during report execution.
 
 Calculated Column:
-Stored physically in model.
+Stored physically in the model.
 """
             },
 
@@ -239,7 +321,7 @@ Query Folding pushes transformations back to source system for optimization.
             {
                 "question": "What is M Language?",
                 "answer": """
-M Language is used in Power Query Editor for transformations.
+M Language is used in Power Query for data transformation.
 """
             }
 
@@ -251,8 +333,8 @@ M Language is used in Power Query Editor for transformations.
                 "question": "What is Star Schema?",
                 "answer": """
 Star Schema contains:
-- Fact table
-- Dimension tables
+- Fact Table
+- Dimension Tables
 """
             },
 
@@ -260,9 +342,9 @@ Star Schema contains:
                 "question": "What is relationship cardinality?",
                 "answer": """
 Types:
-- One to One
-- One to Many
-- Many to Many
+- One-to-One
+- One-to-Many
+- Many-to-Many
 """
             }
 
@@ -276,7 +358,7 @@ Types:
 Methods:
 - Reduce visuals
 - Optimize DAX
-- Use star schema
+- Use Star Schema
 - Remove unused columns
 - Enable aggregations
 """
@@ -335,10 +417,15 @@ for idx, item in enumerate(questions):
     st.markdown(
         f"""
         <div class="question-card">
-            <h4>Question {idx + 1}</h4>
-            <p style='font-size:17px;'>
-            {item['question']}
-            </p>
+
+            <div class="question-title">
+                Question {idx + 1}
+            </div>
+
+            <div class="question-text">
+                {item['question']}
+            </div>
+
         </div>
         """,
         unsafe_allow_html=True
@@ -346,13 +433,13 @@ for idx, item in enumerate(questions):
 
     if st.button(
         f"Show Answer {idx + 1}",
-        key=f"answer_{idx}"
+        key=f"btn_{idx}"
     ):
         st.success(item['answer'])
 
     st.checkbox(
         "Question Asked",
-        key=f"asked_{idx}"
+        key=f"check_{idx}"
     )
 
     st.divider()
@@ -362,7 +449,7 @@ for idx, item in enumerate(questions):
 # ---------------------------------------------------
 
 st.markdown("""
-<div style='text-align:center; color:gray; padding:20px;'>
+<div class="footer">
 Developed for Miracle Data Practices Recruitment Team
 </div>
 """, unsafe_allow_html=True)
