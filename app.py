@@ -11,106 +11,85 @@ st.set_page_config(
 )
 
 # =====================================================
-# CUSTOM CSS
+# CSS
 # =====================================================
 
 st.markdown("""
 <style>
 
-/* =====================================================
-MAIN APP
-===================================================== */
-
 .stApp {
     background-color: #F4F5F7;
-    font-family: 'Segoe UI', sans-serif;
+    font-family: 'Segoe UI';
 }
 
-/* =====================================================
-TOP HEADER
-===================================================== */
+/* HEADER */
 
 .top-header {
     background-color: #1F232A;
-    padding: 15px 40px;
-    border-radius: 0px;
+    padding: 20px 40px;
     margin-bottom: 20px;
 }
 
-.logo-text {
+.logo-title {
     color: white;
     font-size: 42px;
     font-weight: 900;
     line-height: 40px;
 }
 
-.logo-subtext {
+.logo-subtitle {
     color: #00AEEF;
     font-size: 14px;
     font-weight: bold;
     letter-spacing: 1px;
 }
 
-/* =====================================================
-WELCOME BANNER
-===================================================== */
+/* BANNER */
 
 .banner {
     background: linear-gradient(90deg, #0D5EA6, #1F6FB2);
     padding: 30px;
     border-radius: 6px;
     color: white;
+    min-height: 180px;
 }
 
 .banner-title {
-    font-size: 42px;
-    font-weight: 700;
+    font-size: 36px;
+    font-weight: bold;
 }
 
 .banner-text {
     font-size: 18px;
-    margin-top: 10px;
+    margin-top: 15px;
+    line-height: 1.7;
 }
 
-/* =====================================================
-STAT CARDS
-===================================================== */
+/* STAT CARD */
 
 .stat-card {
     background-color: white;
-    padding: 25px;
+    padding: 30px;
     border-radius: 6px;
     text-align: center;
+    min-height: 180px;
     box-shadow: 0px 1px 4px rgba(0,0,0,0.1);
 }
 
 .stat-title {
-    font-size: 24px;
+    font-size: 22px;
     font-weight: bold;
     color: #1F232A;
 }
 
 .stat-value {
-    font-size: 38px;
+    font-size: 42px;
     font-weight: bold;
     color: #0D5EA6;
-}
-
-/* =====================================================
-SEARCH AREA
-===================================================== */
-
-.search-section {
-    background-color: white;
-    padding: 25px;
-    border-radius: 6px;
     margin-top: 20px;
-    margin-bottom: 20px;
 }
 
-/* =====================================================
-QUESTION CARDS
-===================================================== */
+/* QUESTION CARD */
 
 .question-card {
     background-color: white;
@@ -131,22 +110,18 @@ QUESTION CARDS
     color: #333333;
     font-size: 18px;
     margin-top: 15px;
-    line-height: 1.6;
 }
 
-/* =====================================================
-BUTTONS
-===================================================== */
+/* BUTTONS */
 
 .stButton button {
     background-color: #0D5EA6;
     color: white;
     border: none;
     border-radius: 4px;
-    height: 45px;
-    font-size: 16px;
+    height: 42px;
+    font-size: 15px;
     font-weight: 600;
-    width: 100%;
 }
 
 .stButton button:hover {
@@ -154,29 +129,13 @@ BUTTONS
     color: white;
 }
 
-/* =====================================================
-SIDEBAR
-===================================================== */
+/* SIDEBAR */
 
 section[data-testid="stSidebar"] {
-    background-color: #FFFFFF;
-    border-right: 1px solid #D9D9D9;
+    background-color: white;
 }
 
-/* =====================================================
-SIDEBAR TITLE
-===================================================== */
-
-.sidebar-title {
-    color: #0D5EA6;
-    font-size: 26px;
-    font-weight: bold;
-    margin-bottom: 20px;
-}
-
-/* =====================================================
-FOOTER
-===================================================== */
+/* FOOTER */
 
 .footer {
     text-align: center;
@@ -189,18 +148,20 @@ FOOTER
 """, unsafe_allow_html=True)
 
 # =====================================================
-# TOP HEADER
+# HEADER
 # =====================================================
 
 st.markdown("""
 <div class="top-header">
-    <div class="logo-text">
+
+    <div class="logo-title">
         MIRACLE
     </div>
 
-    <div class="logo-subtext">
+    <div class="logo-subtitle">
         SOFTWARE SYSTEMS
     </div>
+
 </div>
 """, unsafe_allow_html=True)
 
@@ -232,6 +193,7 @@ with right:
 
     st.markdown("""
     <div class="stat-card">
+
         <div class="stat-title">
             Total Questions
         </div>
@@ -239,6 +201,7 @@ with right:
         <div class="stat-value">
             120+
         </div>
+
     </div>
     """, unsafe_allow_html=True)
 
@@ -260,7 +223,7 @@ Incremental loading loads only changed or new records.
 Methods:
 - Timestamp
 - CDC
-- Watermark column
+- Watermark columns
 """
             },
 
@@ -268,25 +231,10 @@ Methods:
                 "question": "Difference between DELETE and TRUNCATE?",
                 "answer": """
 DELETE:
-- Removes rows one by one
-- Supports WHERE clause
+Removes rows one by one.
 
 TRUNCATE:
-- Removes all rows quickly
-- Resets identity
-"""
-            },
-
-            {
-                "question": "Explain Window Functions.",
-                "answer": """
-Window functions perform calculations across related rows.
-
-Examples:
-- ROW_NUMBER()
-- RANK()
-- LEAD()
-- LAG()
+Removes all rows quickly and resets identity.
 """
             }
 
@@ -295,38 +243,9 @@ Examples:
         "Microsoft Fabric": [
 
             {
-                "question": "What is Medallion Architecture?",
-                "answer": """
-Bronze → Raw Data
-
-Silver → Cleansed Data
-
-Gold → Business Ready Data
-"""
-            },
-
-            {
                 "question": "What is OneLake?",
                 "answer": """
 OneLake is unified storage in Microsoft Fabric.
-"""
-            }
-
-        ],
-
-        "Azure Data Factory": [
-
-            {
-                "question": "What is Integration Runtime?",
-                "answer": """
-Integration Runtime is compute infrastructure in ADF.
-"""
-            },
-
-            {
-                "question": "Explain Copy Activity.",
-                "answer": """
-Copy Activity transfers data between source and destination.
 """
             }
 
@@ -340,29 +259,7 @@ Copy Activity transfers data between source and destination.
             {
                 "question": "What is CALCULATE in DAX?",
                 "answer": """
-CALCULATE modifies filter context in DAX.
-"""
-            },
-
-            {
-                "question": "Difference between Measure and Calculated Column?",
-                "answer": """
-Measure:
-Calculated dynamically.
-
-Calculated Column:
-Stored physically in model.
-"""
-            }
-
-        ],
-
-        "Power Query": [
-
-            {
-                "question": "What is Query Folding?",
-                "answer": """
-Query Folding pushes transformations back to source system.
+CALCULATE modifies filter context.
 """
             }
 
@@ -374,11 +271,7 @@ Query Folding pushes transformations back to source system.
 # SIDEBAR
 # =====================================================
 
-st.sidebar.markdown("""
-<div class="sidebar-title">
-⚙ Recruitment Setup
-</div>
-""", unsafe_allow_html=True)
+st.sidebar.title("⚙ Recruitment Setup")
 
 role = st.sidebar.selectbox(
     "Select Role",
@@ -401,28 +294,20 @@ experience = st.sidebar.selectbox(
 )
 
 # =====================================================
-# SEARCH SECTION
+# SEARCH
 # =====================================================
-
-st.markdown("""
-<div class="search-section">
-""", unsafe_allow_html=True)
 
 search = st.text_input(
     "Search Questions",
     placeholder="Search by Question Keyword..."
 )
 
-st.markdown("""
-</div>
-""", unsafe_allow_html=True)
-
 # =====================================================
-# MAIN TITLE
+# TITLE
 # =====================================================
 
 st.markdown(f"""
-<h2 style='color:#0D5EA6; margin-bottom:30px;'>
+<h2 style='color:#0D5EA6; margin-top:30px;'>
 📘 {role} → {technology} Interview Questions
 </h2>
 """, unsafe_allow_html=True)
@@ -430,7 +315,7 @@ st.markdown(f"""
 questions = question_bank[role][technology]
 
 # =====================================================
-# QUESTION DISPLAY
+# QUESTIONS
 # =====================================================
 
 for idx, item in enumerate(questions):
@@ -454,7 +339,7 @@ for idx, item in enumerate(questions):
             unsafe_allow_html=True
         )
 
-        col1, col2 = st.columns([1, 5])
+        col1, col2 = st.columns([1, 4])
 
         with col1:
 
@@ -462,7 +347,7 @@ for idx, item in enumerate(questions):
                 f"Show Answer",
                 key=f"btn_{idx}"
             ):
-                st.success(item['answer'])
+                st.success(item["answer"])
 
         with col2:
 
