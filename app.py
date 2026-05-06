@@ -1,156 +1,250 @@
 import streamlit as st
 
-# ---------------------------------------------------
+# =====================================================
 # PAGE CONFIG
-# ---------------------------------------------------
+# =====================================================
 
 st.set_page_config(
-    page_title="Miracle Data Practices",
+    page_title="Miracle Recruitment Portal",
     page_icon="🚀",
     layout="wide"
 )
 
-# ---------------------------------------------------
+# =====================================================
 # CUSTOM CSS
-# ---------------------------------------------------
+# =====================================================
 
 st.markdown("""
 <style>
 
-/* Main App */
+/* =====================================================
+MAIN APP
+===================================================== */
 
 .stApp {
-    background-color: #0E1117;
+    background-color: #F4F5F7;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* =====================================================
+TOP HEADER
+===================================================== */
+
+.top-header {
+    background-color: #1F232A;
+    padding: 15px 40px;
+    border-radius: 0px;
+    margin-bottom: 20px;
+}
+
+.logo-text {
+    color: white;
+    font-size: 42px;
+    font-weight: 900;
+    line-height: 40px;
+}
+
+.logo-subtext {
+    color: #00AEEF;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+/* =====================================================
+WELCOME BANNER
+===================================================== */
+
+.banner {
+    background: linear-gradient(90deg, #0D5EA6, #1F6FB2);
+    padding: 30px;
+    border-radius: 6px;
     color: white;
 }
 
-/* Sidebar */
-
-section[data-testid="stSidebar"] {
-    background-color: #1E1E2F;
+.banner-title {
+    font-size: 42px;
+    font-weight: 700;
 }
 
-/* Buttons */
+.banner-text {
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+/* =====================================================
+STAT CARDS
+===================================================== */
+
+.stat-card {
+    background-color: white;
+    padding: 25px;
+    border-radius: 6px;
+    text-align: center;
+    box-shadow: 0px 1px 4px rgba(0,0,0,0.1);
+}
+
+.stat-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #1F232A;
+}
+
+.stat-value {
+    font-size: 38px;
+    font-weight: bold;
+    color: #0D5EA6;
+}
+
+/* =====================================================
+SEARCH AREA
+===================================================== */
+
+.search-section {
+    background-color: white;
+    padding: 25px;
+    border-radius: 6px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+/* =====================================================
+QUESTION CARDS
+===================================================== */
+
+.question-card {
+    background-color: white;
+    padding: 25px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    border-left: 6px solid #0D5EA6;
+    box-shadow: 0px 1px 4px rgba(0,0,0,0.08);
+}
+
+.question-title {
+    color: #0D5EA6;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.question-text {
+    color: #333333;
+    font-size: 18px;
+    margin-top: 15px;
+    line-height: 1.6;
+}
+
+/* =====================================================
+BUTTONS
+===================================================== */
 
 .stButton button {
-    width: 100%;
-    border-radius: 10px;
-    height: 45px;
-    font-size: 16px;
-    font-weight: bold;
-    background-color: #1F4E79;
+    background-color: #0D5EA6;
     color: white;
     border: none;
+    border-radius: 4px;
+    height: 45px;
+    font-size: 16px;
+    font-weight: 600;
+    width: 100%;
 }
 
 .stButton button:hover {
-    background-color: #2E6EA6;
+    background-color: #084B87;
     color: white;
 }
 
-/* Question Cards */
+/* =====================================================
+SIDEBAR
+===================================================== */
 
-.question-card {
-    background-color: #1E1E2F;
-    padding: 20px;
-    border-radius: 15px;
-    margin-bottom: 15px;
-    border: 1px solid #2E2E3E;
-    box-shadow: 0px 2px 8px rgba(0,0,0,0.3);
+section[data-testid="stSidebar"] {
+    background-color: #FFFFFF;
+    border-right: 1px solid #D9D9D9;
 }
 
-/* Question Title */
+/* =====================================================
+SIDEBAR TITLE
+===================================================== */
 
-.question-title {
-    color: #4DA3FF;
-    font-size: 22px;
+.sidebar-title {
+    color: #0D5EA6;
+    font-size: 26px;
     font-weight: bold;
+    margin-bottom: 20px;
 }
 
-/* Question Text */
-
-.question-text {
-    color: white;
-    font-size: 18px;
-    margin-top: 10px;
-}
-
-/* Header */
-
-.main-title {
-    text-align: center;
-    color: #4DA3FF;
-    font-size: 52px;
-    font-weight: bold;
-}
-
-.sub-title {
-    text-align: center;
-    color: #CFCFCF;
-    font-size: 32px;
-    margin-top: 10px;
-}
-
-.caption-text {
-    text-align: center;
-    color: white;
-    font-size: 18px;
-    margin-top: 10px;
-    margin-bottom: 30px;
-}
-
-/* Footer */
+/* =====================================================
+FOOTER
+===================================================== */
 
 .footer {
     text-align: center;
     color: gray;
-    padding: 20px;
-    margin-top: 30px;
-}
-
-/* Success Message */
-
-.stSuccess {
-    border-radius: 10px;
-}
-
-/* Checkbox */
-
-.stCheckbox label {
-    color: white !important;
-    font-size: 16px;
+    padding: 30px;
+    font-size: 14px;
 }
 
 </style>
 """, unsafe_allow_html=True)
 
-# ---------------------------------------------------
-# HEADER
-# ---------------------------------------------------
+# =====================================================
+# TOP HEADER
+# =====================================================
 
 st.markdown("""
-<div class="main-title">
-🚀 Miracle Data Practices
+<div class="top-header">
+    <div class="logo-text">
+        MIRACLE
+    </div>
+
+    <div class="logo-subtext">
+        SOFTWARE SYSTEMS
+    </div>
 </div>
 """, unsafe_allow_html=True)
 
-st.markdown("""
-<div class="sub-title">
-Recruitment Interview Portal
-</div>
-""", unsafe_allow_html=True)
+# =====================================================
+# TOP SECTION
+# =====================================================
 
-st.markdown("""
-<div class="caption-text">
-Interview Question Assistant for Data Engineers & Power BI Developers
-</div>
-""", unsafe_allow_html=True)
+left, right = st.columns([3, 1.4])
 
-st.divider()
+with left:
 
-# ---------------------------------------------------
+    st.markdown("""
+    <div class="banner">
+
+        <div class="banner-title">
+            Welcome to Miracle Recruitment Portal!
+        </div>
+
+        <div class="banner-text">
+            Recruitment Interview Question Portal for Data Engineers,
+            Power BI Developers, Microsoft Fabric Engineers,
+            and Azure Data Professionals.
+        </div>
+
+    </div>
+    """, unsafe_allow_html=True)
+
+with right:
+
+    st.markdown("""
+    <div class="stat-card">
+        <div class="stat-title">
+            Total Questions
+        </div>
+
+        <div class="stat-value">
+            120+
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+# =====================================================
 # QUESTION BANK
-# ---------------------------------------------------
+# =====================================================
 
 question_bank = {
 
@@ -161,7 +255,7 @@ question_bank = {
             {
                 "question": "Explain Incremental Loading.",
                 "answer": """
-Incremental loading loads only new or modified records instead of full load.
+Incremental loading loads only changed or new records.
 
 Methods:
 - Timestamp
@@ -171,7 +265,20 @@ Methods:
             },
 
             {
-                "question": "What are Window Functions?",
+                "question": "Difference between DELETE and TRUNCATE?",
+                "answer": """
+DELETE:
+- Removes rows one by one
+- Supports WHERE clause
+
+TRUNCATE:
+- Removes all rows quickly
+- Resets identity
+"""
+            },
+
+            {
+                "question": "Explain Window Functions.",
                 "answer": """
 Window functions perform calculations across related rows.
 
@@ -181,18 +288,27 @@ Examples:
 - LEAD()
 - LAG()
 """
+            }
+
+        ],
+
+        "Microsoft Fabric": [
+
+            {
+                "question": "What is Medallion Architecture?",
+                "answer": """
+Bronze → Raw Data
+
+Silver → Cleansed Data
+
+Gold → Business Ready Data
+"""
             },
 
             {
-                "question": "Difference between DELETE and TRUNCATE?",
+                "question": "What is OneLake?",
                 "answer": """
-DELETE:
-- Removes rows one by one
-- Can use WHERE clause
-
-TRUNCATE:
-- Removes all rows quickly
-- Resets identity
+OneLake is unified storage in Microsoft Fabric.
 """
             }
 
@@ -203,75 +319,14 @@ TRUNCATE:
             {
                 "question": "What is Integration Runtime?",
                 "answer": """
-Integration Runtime is the compute infrastructure used by Azure Data Factory.
+Integration Runtime is compute infrastructure in ADF.
 """
             },
 
             {
                 "question": "Explain Copy Activity.",
                 "answer": """
-Copy Activity is used to transfer data from source to destination.
-"""
-            },
-
-            {
-                "question": "What are Linked Services?",
-                "answer": """
-Linked Services are connection configurations used to connect external systems.
-"""
-            }
-
-        ],
-
-        "Microsoft Fabric": [
-
-            {
-                "question": "Explain Medallion Architecture.",
-                "answer": """
-Bronze Layer:
-Raw data
-
-Silver Layer:
-Cleaned and transformed data
-
-Gold Layer:
-Business-ready data
-"""
-            },
-
-            {
-                "question": "What is OneLake?",
-                "answer": """
-OneLake is Microsoft Fabric's unified data lake storage.
-"""
-            },
-
-            {
-                "question": "What is a Lakehouse?",
-                "answer": """
-Lakehouse combines Data Lake and Data Warehouse capabilities.
-"""
-            }
-
-        ],
-
-        "PySpark": [
-
-            {
-                "question": "What is Lazy Evaluation?",
-                "answer": """
-Transformations execute only when an action is triggered.
-"""
-            },
-
-            {
-                "question": "Difference between Transformation and Action?",
-                "answer": """
-Transformation:
-Returns a new dataframe.
-
-Action:
-Executes computation and returns result.
+Copy Activity transfers data between source and destination.
 """
             }
 
@@ -293,17 +348,10 @@ CALCULATE modifies filter context in DAX.
                 "question": "Difference between Measure and Calculated Column?",
                 "answer": """
 Measure:
-Calculated dynamically during report execution.
+Calculated dynamically.
 
 Calculated Column:
-Stored physically in the model.
-"""
-            },
-
-            {
-                "question": "What is FILTER function?",
-                "answer": """
-FILTER returns a filtered table based on conditions.
+Stored physically in model.
 """
             }
 
@@ -314,53 +362,7 @@ FILTER returns a filtered table based on conditions.
             {
                 "question": "What is Query Folding?",
                 "answer": """
-Query Folding pushes transformations back to source system for optimization.
-"""
-            },
-
-            {
-                "question": "What is M Language?",
-                "answer": """
-M Language is used in Power Query for data transformation.
-"""
-            }
-
-        ],
-
-        "Data Modeling": [
-
-            {
-                "question": "What is Star Schema?",
-                "answer": """
-Star Schema contains:
-- Fact Table
-- Dimension Tables
-"""
-            },
-
-            {
-                "question": "What is relationship cardinality?",
-                "answer": """
-Types:
-- One-to-One
-- One-to-Many
-- Many-to-Many
-"""
-            }
-
-        ],
-
-        "Performance Tuning": [
-
-            {
-                "question": "How do you optimize Power BI reports?",
-                "answer": """
-Methods:
-- Reduce visuals
-- Optimize DAX
-- Use Star Schema
-- Remove unused columns
-- Enable aggregations
+Query Folding pushes transformations back to source system.
 """
             }
 
@@ -368,11 +370,15 @@ Methods:
     }
 }
 
-# ---------------------------------------------------
+# =====================================================
 # SIDEBAR
-# ---------------------------------------------------
+# =====================================================
 
-st.sidebar.header("⚙️ Interview Setup")
+st.sidebar.markdown("""
+<div class="sidebar-title">
+⚙ Recruitment Setup
+</div>
+""", unsafe_allow_html=True)
 
 role = st.sidebar.selectbox(
     "Select Role",
@@ -394,62 +400,83 @@ experience = st.sidebar.selectbox(
     ]
 )
 
-st.sidebar.divider()
+# =====================================================
+# SEARCH SECTION
+# =====================================================
 
-st.sidebar.info(f"""
-Role: {role}
+st.markdown("""
+<div class="search-section">
+""", unsafe_allow_html=True)
 
-Technology: {technology}
+search = st.text_input(
+    "Search Questions",
+    placeholder="Search by Question Keyword..."
+)
 
-Experience: {experience}
-""")
+st.markdown("""
+</div>
+""", unsafe_allow_html=True)
 
-# ---------------------------------------------------
-# MAIN CONTENT
-# ---------------------------------------------------
+# =====================================================
+# MAIN TITLE
+# =====================================================
 
-st.subheader(f"📘 {role} → {technology} Interview Questions")
+st.markdown(f"""
+<h2 style='color:#0D5EA6; margin-bottom:30px;'>
+📘 {role} → {technology} Interview Questions
+</h2>
+""", unsafe_allow_html=True)
 
 questions = question_bank[role][technology]
 
+# =====================================================
+# QUESTION DISPLAY
+# =====================================================
+
 for idx, item in enumerate(questions):
 
-    st.markdown(
-        f"""
-        <div class="question-card">
+    if search.lower() in item["question"].lower():
 
-            <div class="question-title">
-                Question {idx + 1}
+        st.markdown(
+            f"""
+            <div class="question-card">
+
+                <div class="question-title">
+                    Question {idx + 1}
+                </div>
+
+                <div class="question-text">
+                    {item['question']}
+                </div>
+
             </div>
+            """,
+            unsafe_allow_html=True
+        )
 
-            <div class="question-text">
-                {item['question']}
-            </div>
+        col1, col2 = st.columns([1, 5])
 
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
+        with col1:
 
-    if st.button(
-        f"Show Answer {idx + 1}",
-        key=f"btn_{idx}"
-    ):
-        st.success(item['answer'])
+            if st.button(
+                f"Show Answer",
+                key=f"btn_{idx}"
+            ):
+                st.success(item['answer'])
 
-    st.checkbox(
-        "Question Asked",
-        key=f"check_{idx}"
-    )
+        with col2:
 
-    st.divider()
+            st.checkbox(
+                "Question Asked",
+                key=f"check_{idx}"
+            )
 
-# ---------------------------------------------------
+# =====================================================
 # FOOTER
-# ---------------------------------------------------
+# =====================================================
 
 st.markdown("""
 <div class="footer">
-Developed for Miracle Data Practices Recruitment Team
+Developed for Miracle Software Systems Recruitment Team
 </div>
 """, unsafe_allow_html=True)
