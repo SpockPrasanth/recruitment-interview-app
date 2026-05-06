@@ -1,8 +1,8 @@
 import streamlit as st
 
-# =========================================================
+# =====================================================
 # PAGE CONFIG
-# =========================================================
+# =====================================================
 
 st.set_page_config(
     page_title="Miracle Recruitment Portal",
@@ -10,23 +10,26 @@ st.set_page_config(
     layout="wide"
 )
 
-# =========================================================
-# CSS
-# =========================================================
+# =====================================================
+# CUSTOM CSS
+# =====================================================
 
 st.markdown("""
 <style>
+
+/* Main App */
 
 .stApp {
     background-color: #F4F5F7;
     font-family: 'Segoe UI', sans-serif;
 }
 
-/* HEADER */
+/* Header */
 
-.header-container {
+.main-header {
     background-color: #1F232A;
     padding: 20px 40px;
+    border-radius: 5px;
     margin-bottom: 25px;
 }
 
@@ -44,52 +47,27 @@ st.markdown("""
     letter-spacing: 1px;
 }
 
-/* BANNER */
+/* Welcome Banner */
 
 .banner {
     background: linear-gradient(90deg, #0D5EA6, #1F6FB2);
     padding: 30px;
     border-radius: 8px;
     color: white;
-    min-height: 180px;
+    margin-bottom: 25px;
 }
 
 .banner-title {
-    font-size: 34px;
+    font-size: 32px;
     font-weight: bold;
 }
 
 .banner-text {
     font-size: 18px;
-    margin-top: 15px;
-    line-height: 1.7;
+    margin-top: 10px;
 }
 
-/* STAT CARD */
-
-.stat-card {
-    background-color: white;
-    padding: 30px;
-    border-radius: 8px;
-    text-align: center;
-    min-height: 180px;
-    box-shadow: 0px 1px 4px rgba(0,0,0,0.1);
-}
-
-.stat-title {
-    font-size: 24px;
-    font-weight: bold;
-    color: #1F232A;
-}
-
-.stat-value {
-    font-size: 42px;
-    font-weight: bold;
-    color: #0D5EA6;
-    margin-top: 20px;
-}
-
-/* QUESTION CARD */
+/* Question Card */
 
 .question-card {
     background-color: white;
@@ -100,26 +78,14 @@ st.markdown("""
     box-shadow: 0px 1px 4px rgba(0,0,0,0.08);
 }
 
-.question-title {
-    color: #0D5EA6;
-    font-size: 22px;
-    font-weight: bold;
-}
-
-.question-text {
-    color: #333333;
-    font-size: 18px;
-    margin-top: 15px;
-}
-
-/* BUTTONS */
+/* Buttons */
 
 .stButton button {
     background-color: #0D5EA6;
     color: white;
     border: none;
     border-radius: 5px;
-    height: 42px;
+    height: 40px;
     font-size: 15px;
     font-weight: 600;
 }
@@ -129,30 +95,31 @@ st.markdown("""
     color: white;
 }
 
-/* SIDEBAR */
+/* Sidebar */
 
 section[data-testid="stSidebar"] {
     background-color: white;
 }
 
-/* FOOTER */
+/* Footer */
 
 .footer {
     text-align: center;
     color: gray;
-    padding: 30px;
+    padding: 20px;
     font-size: 14px;
 }
 
 </style>
 """, unsafe_allow_html=True)
 
-# =========================================================
+# =====================================================
 # HEADER
-# =========================================================
+# =====================================================
 
 st.markdown("""
-<div class="header-container">
+<div class="main-header">
+
     <div class="logo-title">
         MIRACLE
     </div>
@@ -160,16 +127,17 @@ st.markdown("""
     <div class="logo-subtitle">
         SOFTWARE SYSTEMS
     </div>
+
 </div>
 """, unsafe_allow_html=True)
 
-# =========================================================
+# =====================================================
 # TOP SECTION
-# =========================================================
+# =====================================================
 
-col1, col2 = st.columns([3, 1.3])
+left, right = st.columns([3, 1])
 
-with col1:
+with left:
 
     st.markdown("""
     <div class="banner">
@@ -179,33 +147,24 @@ with col1:
         </div>
 
         <div class="banner-text">
-            Recruitment Interview Question Portal for Data Engineers,
-            Power BI Developers, Microsoft Fabric Engineers,
+            Interview Question Assistant for Data Engineers,
+            Power BI Developers, Fabric Engineers,
             and Azure Data Professionals.
         </div>
 
     </div>
     """, unsafe_allow_html=True)
 
-with col2:
+with right:
 
-    st.markdown("""
-    <div class="stat-card">
+    st.metric(
+        label="Total Questions",
+        value="120+"
+    )
 
-        <div class="stat-title">
-            Total Questions
-        </div>
-
-        <div class="stat-value">
-            120+
-        </div>
-
-    </div>
-    """, unsafe_allow_html=True)
-
-# =========================================================
-# QUESTION BANK
-# =========================================================
+# =====================================================
+# HARDCODED QUESTION BANK
+# =====================================================
 
 question_bank = {
 
@@ -214,34 +173,79 @@ question_bank = {
         "SQL": [
 
             {
-                "question": "Explain Incremental Loading.",
+                "question": "What is the difference between DELETE, TRUNCATE, and DROP?",
                 "answer": """
-Incremental loading loads only changed or new records.
+DELETE removes rows and can be rolled back.
 
-Methods:
-- Timestamp
-- CDC
-- Watermark column
+TRUNCATE removes all rows and resets identity.
+
+DROP removes the entire table structure.
 """
             },
 
             {
-                "question": "Difference between DELETE and TRUNCATE?",
+                "question": "Explain window functions in SQL.",
                 "answer": """
-DELETE removes rows one by one.
+Window functions perform calculations across rows related to the current row.
 
-TRUNCATE removes all rows quickly and resets identity.
+Examples:
+ROW_NUMBER()
+RANK()
+DENSE_RANK()
+LEAD()
+LAG()
+"""
+            },
+
+            {
+                "question": "What is incremental loading?",
+                "answer": """
+Incremental loading loads only new or changed records instead of full load.
+
+Usually implemented using:
+- Timestamp
+- CDC
+- Watermark columns
 """
             }
 
         ],
 
-        "Microsoft Fabric": [
+        "ADF": [
+
+            {
+                "question": "What is Integration Runtime in ADF?",
+                "answer": """
+Integration Runtime is the compute infrastructure used by Azure Data Factory
+to move and transform data.
+"""
+            },
+
+            {
+                "question": "Explain Copy Activity.",
+                "answer": """
+Copy Activity is used to move data from source to destination.
+"""
+            }
+
+        ],
+
+        "Fabric": [
+
+            {
+                "question": "What is Medallion Architecture?",
+                "answer": """
+Medallion Architecture consists of:
+- Bronze Layer
+- Silver Layer
+- Gold Layer
+"""
+            },
 
             {
                 "question": "What is OneLake?",
                 "answer": """
-OneLake is unified storage in Microsoft Fabric.
+OneLake is Microsoft Fabric's unified data lake storage.
 """
             }
 
@@ -253,9 +257,44 @@ OneLake is unified storage in Microsoft Fabric.
         "DAX": [
 
             {
-                "question": "What is CALCULATE in DAX?",
+                "question": "What is CALCULATE function?",
                 "answer": """
-CALCULATE modifies filter context.
+CALCULATE modifies filter context in DAX.
+"""
+            },
+
+            {
+                "question": "Difference between calculated column and measure?",
+                "answer": """
+Calculated Column:
+Stored physically in model.
+
+Measure:
+Calculated dynamically during query execution.
+"""
+            }
+
+        ],
+
+        "Power Query": [
+
+            {
+                "question": "What is query folding?",
+                "answer": """
+Query folding pushes transformations back to source system.
+"""
+            }
+
+        ],
+
+        "Data Modeling": [
+
+            {
+                "question": "What is star schema?",
+                "answer": """
+Star schema contains:
+- Fact table
+- Dimension tables
 """
             }
 
@@ -263,11 +302,11 @@ CALCULATE modifies filter context.
     }
 }
 
-# =========================================================
+# =====================================================
 # SIDEBAR
-# =========================================================
+# =====================================================
 
-st.sidebar.title("⚙ Recruitment Setup")
+st.sidebar.header("⚙ Interview Setup")
 
 role = st.sidebar.selectbox(
     "Select Role",
@@ -281,83 +320,75 @@ technology = st.sidebar.selectbox(
 
 experience = st.sidebar.selectbox(
     "Experience Level",
-    [
-        "Fresher",
-        "2-4 Years",
-        "5-8 Years",
-        "10+ Years"
-    ]
+    ["Fresher", "2-4 Years", "5-8 Years", "10+ Years"]
 )
 
-# =========================================================
+# =====================================================
 # SEARCH
-# =========================================================
+# =====================================================
 
 search = st.text_input(
     "Search Questions",
-    placeholder="Search by Question Keyword..."
+    placeholder="Search by keyword..."
 )
 
-# =========================================================
-# PAGE TITLE
-# =========================================================
+# =====================================================
+# MAIN SCREEN
+# =====================================================
 
-st.markdown(
-    f"""
-    <h2 style='color:#0D5EA6; margin-top:30px;'>
-    📘 {role} → {technology} Interview Questions
-    </h2>
-    """,
-    unsafe_allow_html=True
-)
+st.markdown(f"""
+<h2 style='color:#0D5EA6; margin-top:20px;'>
+📘 {role} → {technology} Interview Questions
+</h2>
+""", unsafe_allow_html=True)
 
 questions = question_bank[role][technology]
 
-# =========================================================
-# QUESTIONS
-# =========================================================
-
-for idx, item in enumerate(questions):
+for index, item in enumerate(questions):
 
     if search.lower() in item["question"].lower():
 
-        st.markdown(
-            f"""
-            <div class="question-card">
+        with st.container():
 
-                <div class="question-title">
-                    Question {idx + 1}
+            st.markdown(
+                f"""
+                <div class="question-card">
+
+                    <h3 style="color:#0D5EA6;">
+                        Question {index + 1}
+                    </h3>
+
+                    <p style="font-size:18px; color:#333333;">
+                        {item['question']}
+                    </p>
+
                 </div>
-
-                <div class="question-text">
-                    {item['question']}
-                </div>
-
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
-
-        col1, col2 = st.columns([1, 4])
-
-        with col1:
-
-            if st.button(
-                "Show Answer",
-                key=f"btn_{idx}"
-            ):
-                st.success(item["answer"])
-
-        with col2:
-
-            st.checkbox(
-                "Question Asked",
-                key=f"check_{idx}"
+                """,
+                unsafe_allow_html=True
             )
 
-# =========================================================
+            col1, col2 = st.columns([1, 4])
+
+            with col1:
+
+                if st.button(
+                    f"Show Answer",
+                    key=index
+                ):
+                    st.success(item['answer'])
+
+            with col2:
+
+                st.checkbox(
+                    "Question Asked",
+                    key=f"asked_{index}"
+                )
+
+# =====================================================
 # FOOTER
-# =========================================================
+# =====================================================
+
+st.divider()
 
 st.markdown("""
 <div class="footer">
