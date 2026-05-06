@@ -1,8 +1,8 @@
 import streamlit as st
 
-# =====================================================
+# =========================================================
 # PAGE CONFIG
-# =====================================================
+# =========================================================
 
 st.set_page_config(
     page_title="Miracle Recruitment Portal",
@@ -10,24 +10,24 @@ st.set_page_config(
     layout="wide"
 )
 
-# =====================================================
+# =========================================================
 # CSS
-# =====================================================
+# =========================================================
 
 st.markdown("""
 <style>
 
 .stApp {
     background-color: #F4F5F7;
-    font-family: 'Segoe UI';
+    font-family: 'Segoe UI', sans-serif;
 }
 
 /* HEADER */
 
-.top-header {
+.header-container {
     background-color: #1F232A;
     padding: 20px 40px;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
 }
 
 .logo-title {
@@ -49,13 +49,13 @@ st.markdown("""
 .banner {
     background: linear-gradient(90deg, #0D5EA6, #1F6FB2);
     padding: 30px;
-    border-radius: 6px;
+    border-radius: 8px;
     color: white;
     min-height: 180px;
 }
 
 .banner-title {
-    font-size: 36px;
+    font-size: 34px;
     font-weight: bold;
 }
 
@@ -70,14 +70,14 @@ st.markdown("""
 .stat-card {
     background-color: white;
     padding: 30px;
-    border-radius: 6px;
+    border-radius: 8px;
     text-align: center;
     min-height: 180px;
     box-shadow: 0px 1px 4px rgba(0,0,0,0.1);
 }
 
 .stat-title {
-    font-size: 22px;
+    font-size: 24px;
     font-weight: bold;
     color: #1F232A;
 }
@@ -94,7 +94,7 @@ st.markdown("""
 .question-card {
     background-color: white;
     padding: 25px;
-    border-radius: 6px;
+    border-radius: 8px;
     margin-bottom: 20px;
     border-left: 6px solid #0D5EA6;
     box-shadow: 0px 1px 4px rgba(0,0,0,0.08);
@@ -102,7 +102,7 @@ st.markdown("""
 
 .question-title {
     color: #0D5EA6;
-    font-size: 24px;
+    font-size: 22px;
     font-weight: bold;
 }
 
@@ -118,7 +118,7 @@ st.markdown("""
     background-color: #0D5EA6;
     color: white;
     border: none;
-    border-radius: 4px;
+    border-radius: 5px;
     height: 42px;
     font-size: 15px;
     font-weight: 600;
@@ -147,13 +147,12 @@ section[data-testid="stSidebar"] {
 </style>
 """, unsafe_allow_html=True)
 
-# =====================================================
+# =========================================================
 # HEADER
-# =====================================================
+# =========================================================
 
 st.markdown("""
-<div class="top-header">
-
+<div class="header-container">
     <div class="logo-title">
         MIRACLE
     </div>
@@ -161,17 +160,16 @@ st.markdown("""
     <div class="logo-subtitle">
         SOFTWARE SYSTEMS
     </div>
-
 </div>
 """, unsafe_allow_html=True)
 
-# =====================================================
+# =========================================================
 # TOP SECTION
-# =====================================================
+# =========================================================
 
-left, right = st.columns([3, 1.4])
+col1, col2 = st.columns([3, 1.3])
 
-with left:
+with col1:
 
     st.markdown("""
     <div class="banner">
@@ -189,7 +187,7 @@ with left:
     </div>
     """, unsafe_allow_html=True)
 
-with right:
+with col2:
 
     st.markdown("""
     <div class="stat-card">
@@ -205,9 +203,9 @@ with right:
     </div>
     """, unsafe_allow_html=True)
 
-# =====================================================
+# =========================================================
 # QUESTION BANK
-# =====================================================
+# =========================================================
 
 question_bank = {
 
@@ -223,18 +221,16 @@ Incremental loading loads only changed or new records.
 Methods:
 - Timestamp
 - CDC
-- Watermark columns
+- Watermark column
 """
             },
 
             {
                 "question": "Difference between DELETE and TRUNCATE?",
                 "answer": """
-DELETE:
-Removes rows one by one.
+DELETE removes rows one by one.
 
-TRUNCATE:
-Removes all rows quickly and resets identity.
+TRUNCATE removes all rows quickly and resets identity.
 """
             }
 
@@ -267,9 +263,9 @@ CALCULATE modifies filter context.
     }
 }
 
-# =====================================================
+# =========================================================
 # SIDEBAR
-# =====================================================
+# =========================================================
 
 st.sidebar.title("⚙ Recruitment Setup")
 
@@ -293,30 +289,33 @@ experience = st.sidebar.selectbox(
     ]
 )
 
-# =====================================================
+# =========================================================
 # SEARCH
-# =====================================================
+# =========================================================
 
 search = st.text_input(
     "Search Questions",
     placeholder="Search by Question Keyword..."
 )
 
-# =====================================================
-# TITLE
-# =====================================================
+# =========================================================
+# PAGE TITLE
+# =========================================================
 
-st.markdown(f"""
-<h2 style='color:#0D5EA6; margin-top:30px;'>
-📘 {role} → {technology} Interview Questions
-</h2>
-""", unsafe_allow_html=True)
+st.markdown(
+    f"""
+    <h2 style='color:#0D5EA6; margin-top:30px;'>
+    📘 {role} → {technology} Interview Questions
+    </h2>
+    """,
+    unsafe_allow_html=True
+)
 
 questions = question_bank[role][technology]
 
-# =====================================================
+# =========================================================
 # QUESTIONS
-# =====================================================
+# =========================================================
 
 for idx, item in enumerate(questions):
 
@@ -344,7 +343,7 @@ for idx, item in enumerate(questions):
         with col1:
 
             if st.button(
-                f"Show Answer",
+                "Show Answer",
                 key=f"btn_{idx}"
             ):
                 st.success(item["answer"])
@@ -356,9 +355,9 @@ for idx, item in enumerate(questions):
                 key=f"check_{idx}"
             )
 
-# =====================================================
+# =========================================================
 # FOOTER
-# =====================================================
+# =========================================================
 
 st.markdown("""
 <div class="footer">
